@@ -8,6 +8,7 @@ interface IPostAttributes {
   user_id: number;
   title: string;
   content: string | null;
+  slug: string | null;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -18,6 +19,7 @@ class Post extends Model<IPostAttributes, TPostCreationAttributes> implements IP
   declare id: number;
   declare user_id: number;
   declare title: string;
+  declare slug: string | null;
   declare content: string | null;
   declare createdAt: Date;
   declare updatedAt: Date;
@@ -37,6 +39,11 @@ Post.init(
     title: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    slug: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: true,
     },
     content: {
       type: DataTypes.TEXT,
